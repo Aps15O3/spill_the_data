@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Linear regression{% endblock title %}
+<div class="container">
+{% block body %}
+<br><br>
+<div class="container">
+<div class="card" style="width: 25rem;text-align: justify;">
+    <img src="https://www.digitalvidya.com/wp-content/uploads/2019/03/Linear-Regression.jpg" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title" style="font-size:30px;margin-left: 50px;">Linear Regression</h5>
+      <p class="card-text" style="font-size:20px;">Linear regression analysis is used to predict the value of a variable based on the value of another variable.</p>
+      <a href="/linear" class="btn btn-primary" style="margin-left:100px;">Linear regression</a>
+      <a href="/linear2" class="btn btn-primary" style="margin-left:100px;">Linear regression</a>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-dark" id="btn">Dark</button>
+  <form class="row g-3" method="post" action="/linear">
+    {% csrf_token %}
+    <div class="col-md-4">
+        <label for="validationDefault01" class="form-label">First name</label>
+        <input type="text" class="form-control" id="validationDefault01" name="link" placeholder="enter name" required>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Submit form</button>
+    </div>
+</form>
+
+</div>
+
+<script>
+const btn = document.getElementById("btn"); 
+var speech = true;
+window.SpeechRecognition = window.SpeechRecognition
+        || window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
+var transcript="abcd"
+
+recognition.addEventListener('result', e => {
+  transcript = Array.from(e.results)
+    .map(result => result[0])
+    .map(result => result.transcript)
+    .join('')
+    //console.log(transcript);
+});
+recognition.addEventListener('end',function(){
+  console.log(transcript);
+  
+  console.log(transcript);
+  $.ajax({
+    type : "post",
+    url : "/home",
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}',
+            transcript},
+    success: function(resp){
+    console.log(resp)
+    window.location.href = resp
+    }
+  })
+
+}) 
+btn.addEventListener('click',function(){
+  recognition.start();  
+})
+//The event.result property contains the last/previous value returned by an event handler triggered by the specified event.
+
+</script>
+{% endblock body %}
