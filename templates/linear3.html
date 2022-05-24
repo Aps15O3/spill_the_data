@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Linear regression{% endblock title %}
+<div class="container">
+{% block body %}
+
+<h2 style="margin-left:950px;margin-top: 90px;position:absolute;">{{variable}}</h2>
+
+<div style="margin-left:20px; margin-top:-50px;">
+{{graph|safe}}
+
+</div>
+</div>
+
+{% endblock body %}

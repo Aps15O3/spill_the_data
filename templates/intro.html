@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Introduction{% endblock title %}
+
+{% block body %}
+<br>
+<div class="container">
+<div class="jumbotron p-5 bg-light rounded-3" style="width:90%; margin-left:5%" >
+    <h1 class="display-2 text-center">What is Machine Learning?</h1>
+    <p style="font-size:22px;">Machine learning is a field of inquiry devoted to understanding and building methods that
+        'learn', that is, methods that leverage data to improve performance on some set of tasks. It is
+        seen as a part of artificial intelligence. Machine learning algorithms build a model based on
+        sample data, known as training data, in order to make predictions or decisions without being
+        explicitly programmed to do so. Machine learning algorithms are used in a wide variety of
+        applications, such as in medicine, email filtering, speech recognition, and computer vision, where
+        it is difficult or unfeasible to develop conventional algorithms to perform the needed tasks.
+        <br>
+        A subset of machine learning is closely related to computational statistics, which focuses on
+        making predictions using computers; but not all machine learning is statistical learning. The study
+        of mathematical optimization delivers methods, theory and application domains to the field of
+        machine learning. Data mining is a related field of study, focusing on exploratory data
+        analysis through unsupervised learning. Some implementations of machine learning use data
+        and neural networks in a way that mimics the working of a biological brain. In its application
+        across business problems, machine learning is also referred to as predictive analytics.</p>
+  </div>
+  <br>
+  <div class="jumbotron p-5 bg-light rounded-3" style="width:90%; margin-left:5%" >
+    <h1 class="display-2 text-center">Types Of Machine Learning:</h1>
+    <div class="jumbotron p-1 bg-light rounded-3 h-100 " >
+        <h1 class="display-5">Supervised Learning</h1>
+        <p style="font-size:22px;">
+            Supervised learning is the machine learning task of learning a function that maps an input
+to an output based on example input-output pairs. It infers a function from labeled training
+data consisting of a set of training examples. In supervised learning, each example is
+a pair consisting of an input object (typically a vector) and a desired output value (also called
+the supervisory signal). A supervised learning algorithm analyzes the training data and produces
+an inferred function, which can be used for mapping new examples. An optimal scenario will
+allow for the algorithm to correctly determine the class labels for unseen instances. This requires
+the learning algorithm to generalize from the training data to unseen situations in a 'reasonable'
+way (see inductive bias). This statistical quality of an algorithm is measured through the so-
+called generalization error.
+        </p>
+        <br>
+        <h1 class="display-6">Types of Supervised Machined Learning Algorithms:</h1>
+        <ul class="list-group list-group-flush bg-light">
+            <li class="list-group-item" style="font-size:22px;">Linear Regression</li>
+            <li class="list-group-item" style="font-size:22px;">Logistic Regression</li>
+            <li class="list-group-item" style="font-size:22px;">Decision Tree</li>
+            <li class="list-group-item" style="font-size:22px;">Random Forests</li>
+            <li class="list-group-item" style="font-size:22px;">SVM(Support Vector Machine)</li>
+          </ul>
+          
+       
+      </div> 
+
+   
+  </div>
+</div>
+
+
+{% endblock body %}
