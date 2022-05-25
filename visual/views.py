@@ -64,7 +64,7 @@ def linear2(request):
     return render(request,'linear2.html',context)
 
 def linear3(request):
-    car = pd.read_csv("static/Cleaned Car.csv")
+    car = pd.read_csv("static/Cleaned Car.csv",index_col=[0])
     x=car.drop(columns="Price")#dependent variable
     y=car["Price"]
     ohe=OneHotEncoder()
@@ -76,7 +76,6 @@ def linear3(request):
     pipe.fit(x_train,y_train)
     y_pred=pipe.predict(x_test)
     r2_score(y_test,y_pred)
-
     fig = plt.figure(figsize=(9,11))
     plt.scatter(y_test,y_pred)
     m, b = np.polyfit(y_test, y_pred, 1)
@@ -85,13 +84,40 @@ def linear3(request):
     fig.savefig(imgdata, format='svg')
     imgdata.seek(0)
     data = imgdata.getvalue()
-        
-    context={
-        "variable":r2_score(y_test,y_pred),
-        "graph":data
-    }                              
+    if request.method=="POST":
+        model = request.POST.get('model')
+        year = request.POST.get('year')
+        fuel = request.POST.get('fuel')
+        company = request.POST.get('company')
+        kms = request.POST.get('kms')
 
-    return render(request,"linear3.html",context)
+        car=pd.DataFrame([[model,company,year,kms,fuel]],columns=['name','company','year','kms_driven','fuel_type'])
+        print(pipe.predict(car)[0])
+        context={
+        "comp":sorted(x['company'].unique()),
+        "models":sorted(x['name'].unique()),
+        "f_type":sorted(x['fuel_type'].unique()),
+        "yop":sorted(x['year'].unique()),
+        "variable":r2_score(y_test,y_pred),
+        "graph":data,  
+        "pred1":pipe.predict(car) 
+          
+        }
+       
+        return HttpResponse(pipe.predict(car)[0])     
+    else:
+        print("no")
+        context={
+        "comp":sorted(x['company'].unique()),
+        "models":sorted(x['name'].unique()),
+        "f_type":sorted(x['fuel_type'].unique()),
+        "yop":sorted(x['year'].unique()),
+        "variable":r2_score(y_test,y_pred),
+        "graph":data,
+        "pred": "model"
+        }   
+        return render(request,"linear3.html",context)
+
 
 def logistic(request):
     a=pd.read_csv('static/50Startups.csv')

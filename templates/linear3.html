@@ -3,12 +3,133 @@
 <div class="container">
 {% block body %}
 
-<h2 style="margin-left:950px;margin-top: 90px;position:absolute;">{{variable}}</h2>
+<h2 style="margin-left:950px;margin-top: 90px;position:absolute;" id="h">{{variable}}
+   
+</h2>
+
 
 <div style="margin-left:20px; margin-top:-50px;">
 {{graph|safe}}
+<br><br>
+<div class="jumbotron bg-light rounded-3 p-3 text-center" >
+    <h2>{{model}}</h2>
+<form method="POST" action="/linear3">
+    {% csrf_token %}
+    <label class="form-label">Select company</label>
+    <select class="form-select" id="comp_id" onChange="load123(this.id)" required>
+       <option value=""></option>
+        {%for company in comp%}
+        <option value="{{company}}">{{company}}</option>
+        {%endfor%}
+    </select>
+    <br>
+    <label class="form-label">Select Model</label>
+    <select class="form-select" id="name_id" required>
 
+    </select>
+    <br>
+    <label class="form-label">Year Of Purchase</label>
+    <select class="form-select" id="year_id" required>
+        <option value=""></option>
+        {%for year in yop%}
+        <option value="{{year}}">{{year}}</option>
+        {%endfor%}
+    </select>
+    <br>
+    <label class="form-label">Fuel Type</label>
+    <select class="form-select" id="fuel_id" required>
+        <option value=""></option>
+        {%for fuel in f_type%}
+        <option value="{{fuel}}">{{fuel}}</option>
+        {%endfor%}
+    </select>
+    <br>
+    <label class="form-label">Kms Driven</label>
+    <input type="text" class="form-control" id="km"></input>
+    <br>
+    <input type="button" class="btn btn-primary" onClick="pred()" value="Predict"></input>
+    <br><br>
+    <div id='p' class="display-3"></div>
+
+</form>
+</div>
+<br>
 </div>
 </div>
+<script>
+function load123(comp_id)
+{
+    var company = document.getElementById(comp_id);
+    var model = document.getElementById("name_id");
+    model.innerHTML="";
+    model.value="";
+
+    {%for company in comp%}
+    if("{{company}}"==company.value)
+    {
+        {% for model in models  %}
+        {% if company in model %}
+        var option = document.createElement("option");
+        option.value="{{model}}";
+        option.text="{{model}}";
+        model.appendChild(option);
+        {% endif %}
+        {% endfor %}
+    }
+    {% endfor %}
+    
+   }
+function pred(){
+    var model = document.getElementById("name_id");
+    var year = document.getElementById("year_id");
+    var fuel = document.getElementById("fuel_id");
+    var company = document.getElementById("comp_id");
+    var kms = document.getElementById("km");
+    if(model.value=="")
+    {
+        alert("Please fill a value!!!")
+    }
+    else if(year.value=="")
+    {
+        alert("Please fill a value!!!")
+    }
+    else if(kms.value=="")
+    {
+        alert("Please fill a value!!!")
+    }
+    else if(fuel.value=="")
+    {
+        alert("Please fill a value!!!")
+    }
+    else if(company.value=="")
+    {
+        alert("Please fill a value!!!")
+    }
+    else {
+    model=model.value;
+    year=year.value;
+    fuel=fuel.value;
+    company=company.value;
+    kms=kms.value;
+    $.ajax({
+        type : "post",
+        url : "/linear3",
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}',
+               model,
+               year,
+               fuel,
+               company,
+               kms
+                },
+        success: function(resp)
+        {
+            console.log(resp)
+            var k = resp
+            document.getElementById('p').innerHTML=resp
+        }
+      })
+    }
+}
+</script>
 
 {% endblock body %}
