@@ -2,7 +2,130 @@
 {% block title %}Linear regression{% endblock title %}
 <div class="container">
 {% block body %}
-<br><br>
+<style>
+  .carousel {
+    margin-bottom: 4rem;
+    position:relative;
+  }
+  /* Since positioning the image, we need to help out the caption */
+  .carousel-caption {
+    bottom: 3rem;
+  }
+  
+  /* Declare heights because of positioning of img element */
+  .carousel-item {
+    height: 32rem;
+  }
+  .marketing .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  /* rtl:begin:ignore */
+  .marketing .col-lg-4 p {
+    margin-right: .75rem;
+    margin-left: .75rem;
+  }
+</style>
+
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" ></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" ></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100 h-100" src="/static/machine.jpg" alt="First slide">
+      <div class="container">
+        <div class="carousel-caption text-start">
+          <h1>Learn Machine Learning</h1>
+          <p>Machine learning is a field of inquiry devoted to understanding and building methods that 'learn',
+             that is,<br> methods that leverage data to improve performance on some set of tasks.</p>
+          <p><a class="btn btn-lg btn-light" href="/intro">Start Learning now</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100 h-100" src="/static/m2.png" alt="First slide">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Another example headline.</h1>
+          <p>Some representative placeholder content for the second slide of the carousel.</p>
+          <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100 h-100" src="/static/machine.jpg" alt="First slide">
+      <div class="container">
+        <div class="carousel-caption text-end">
+          <h1>One more for good measure.</h1>
+          <p>Some representative placeholder content for the third slide of this carousel.</p>
+          <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div class="container marketing">
+
+  <!-- Three columns of text below the carousel -->
+  <div class="row">
+    <div class="col-lg-4">
+      
+      <div class="bg-light rounded-3">
+      <img src="/static/lr.jpg" class="card-img" style="height: 230px;"></img>
+
+      <h2 class="fw-normal">Linear Regresson</h2>
+      <p>Linear regression analysis is used to predict the value of a variable based on the value of another variable.
+         The variable you want to predict is called the dependent variable.
+         The variable you are using to predict the other variable's value is called the independent variable.</p>
+      <p><a class="btn btn-secondary" href="/linear">Linear Regression example 1</a></p>
+      <p><a class="btn btn-secondary" href="/linear2">Linear Regression example 2</a></p>
+      <p><a class="btn btn-secondary" href="/linear3">Linear Regression example 3</a></p>
+      <br>
+      </div>
+    </div><!-- /.col-lg-4 -->
+    
+    <div class="col-lg-4">
+      <div class="bg-light rounded-3">
+     
+      <img src="/static/log.png" class="card-img" style="height: 230px;"></img>
+      <h2 class="fw-normal">Logistic Regression</h2>
+      <p >Logistic regression is a process of modeling the probability of a discrete outcome given an input
+         variable. The mostcommon logistic regression models a binary outcome; something that can take two values such as
+          true/false, yes/no, and so on.</p>
+          <br>
+      <p><a class="btn btn-secondary" href="/logistic">Logistic Regression Example 1</a></p>
+      <p><a class="btn btn-secondary" href="/logistic2">Logistic Regression Example 2</a></p>
+      <p><a class="btn btn-secondary" href="#">Logistic Regression Example 3</a></p>
+      <br>
+      </div>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <div class="bg-light rounded-3">
+      <img src="/static/SVM.png" class="card-img" style="height: 230px;"></img>
+      <h2 class="fw-normal">Support Vector Machine</h2>
+      <p>SVMs can efficiently perform a non-linear classification using what is called the kernel trick, 
+        implicitly mapping their inputs into high-dimensional feature spaces.The objective of SVM algorithm is to 
+        find a hyperplane in an N-dimensional space that distinctly classifies the data points.</p>
+      <p><a class="btn btn-secondary" href="#">SVM Example 1</a></p>
+      <p><a class="btn btn-secondary" href="#">SVM Example 2</a></p>
+      <p><a class="btn btn-secondary" href="#">SVM Example 3</a></p>
+      <br>
+      </div>
+    </div><!-- /.col-lg-4 -->
+  </div><!-- /.row -->
+
+{% comment %} <br><br>
 <div class="container row">
 <div class="card col-sm-2" style="width: 25rem;text-align: justify;">
     <img src="https://www.digitalvidya.com/wp-content/uploads/2019/03/Linear-Regression.jpg" class="card-img-top" alt="...">
@@ -44,10 +167,10 @@
   </div>
   
 
-</div>
+</div> {% endcomment %}
 
 <script>
-const btn = document.getElementById("btn"); 
+{% comment %} const btn = document.getElementById("btn"); 
 var speech = true;
 window.SpeechRecognition = window.SpeechRecognition
         || window.webkitSpeechRecognition;
@@ -81,7 +204,7 @@ recognition.addEventListener('end',function(){
 }) 
 btn.addEventListener('click',function(){
   recognition.start();  
-})
+}) {% endcomment %}
 //The event.result property contains the last/previous value returned by an event handler triggered by the specified event.
 
 </script>

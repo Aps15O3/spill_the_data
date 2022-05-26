@@ -10,8 +10,9 @@
     <title>{% block title %}{% endblock title %}</title>
     
   </head>
-  <body style="background :url(https://wallpaperaccess.com/full/1426870.png) no-repeat fixed; background-size: 100% 100%;">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="background-color:darkgray;">
+  <body style="background: radial-gradient(circle, rgba(210,210,210,1) 0%, rgba(135,135,135,1) 84%);
+  width:100%;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
         <div class="container-fluid">
           <a class="navbar-brand" href="/home">Home</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,14 +47,24 @@
             </ul>
           </div>
         </div>
-        <button type="submit" class="btn btn-dark rounded-circle" id="btn">Speak</button>
+        <button type="submit" class="btn btn-dark rounded-circle" id="btn"><img src="/static/icon.png" style="width:40px;"></img></button>
       </nav>
+      
+      <div id='box' class='bg-dark text-light' style="margin-left:100%;position:fixed;z-index:20;  height: 200px;
+      width:300px">
+        <div id="c" class="text-light"  style="margin-left:90%">x</div>
+        <p id="box1"></p>
+      </div>
+    </body>
     <!-- Optional JavaScript; choose one of the two! -->
     {% block body %}{% endblock body %}
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <script>
+      var flag=0;
+      $("#c").hide();
+      $("#box").hide();
       const btn = document.getElementById("btn"); 
       var speech = true;
       window.SpeechRecognition = window.SpeechRecognition
@@ -68,28 +79,55 @@
           .map(result => result[0])
           .map(result => result.transcript)
           .join('')
-          //console.log(transcript);
+          console.log(transcript)
+          $("#box1").html(transcript)
+          
       });
       recognition.addEventListener('end',function(){
-        console.log(transcript);
-        
-        console.log(transcript);
-        $.ajax({
-          type : "post",
-          url : "/home",
-          data: {csrfmiddlewaretoken: '{{ csrf_token }}',
-                  transcript},
-          success: function(resp){
-          console.log(resp)
-          window.location.href = resp
-          }
-        })
+        if(flag!=1){
+        setTimeout(function(){
+          $.ajax({
+            type : "post",
+            url : "/home",
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}',
+                    transcript},
+            success: function(resp){
+            console.log(resp)
+            window.location.href = resp
+            }
+          })
+        },400)
+      }
       
       }) 
+      var f=0;
       btn.addEventListener('click',function(){
-        recognition.start();  
+        
+        f=f+1
+        console.log(f)
+        if(f==1){
+        $("#box").animate({
+          left: "-=310",
+          opacity: "show"
+        },500,function(){
+          $("#c").show();
+          $("#box1").show();
+        })
+        flag =0;
+        recognition.start();  }
       })
-
+      $("#c").click(function(){
+        $("#c").hide();
+        $("#box").animate({
+          left: "+=310",
+          opacity: "hide"
+        },0)
+        $("#box1").hide();
+        $("#box1").html("");
+        recognition.stop();
+        flag=1;
+        f=0;
+      })
     </script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
@@ -97,5 +135,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
     
-  </body>
+
 </html>
