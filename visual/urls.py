@@ -10,6 +10,7 @@ urlpatterns = [
     path('linear3',views.linear3),
     path('logistic',views.logistic),
     path('logistic2',views.logistic2),
-    path('intro',views.intro)
+    path('intro',views.intro),
+    path('chart',views.chart)
 
 ]

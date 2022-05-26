@@ -11,42 +11,86 @@
     
   </head>
   <body style="background :url(https://wallpaperaccess.com/full/1426870.png) no-repeat fixed; background-size: 100% 100%;">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color:darkgray;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="background-color:darkgray;">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/home">Navbar</a>
+          <a class="navbar-brand" href="/home">Home</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="/intro">What is Machine Learning?</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
+                  Linear Regression
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="/linear">Linear Regression</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item" href="/linear">Linear Regression Example 1</a></li>
+                  <li><a class="dropdown-item" href="/linear2">Linear Regression Example 2</a></li>
+                  <li><a class="dropdown-item" href="/linear3">Linear Regression Example 3</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Chart
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/linear">Linear Regression Example 1</a></li>
+                  <li><a class="dropdown-item" href="/linear2">Linear Regression Example 2</a></li>
+                  <li><a class="dropdown-item" href="/chart">Linear Regression Example 3</a></li>
                 </ul>
               </li>
               
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
           </div>
         </div>
+        <button type="submit" class="btn btn-dark rounded-circle" id="btn">Speak</button>
       </nav>
     <!-- Optional JavaScript; choose one of the two! -->
     {% block body %}{% endblock body %}
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+    <script>
+      const btn = document.getElementById("btn"); 
+      var speech = true;
+      window.SpeechRecognition = window.SpeechRecognition
+              || window.webkitSpeechRecognition;
+      
+      const recognition = new SpeechRecognition();
+      recognition.interimResults = true;
+      var transcript="abcd"
+      
+      recognition.addEventListener('result', e => {
+        transcript = Array.from(e.results)
+          .map(result => result[0])
+          .map(result => result.transcript)
+          .join('')
+          //console.log(transcript);
+      });
+      recognition.addEventListener('end',function(){
+        console.log(transcript);
+        
+        console.log(transcript);
+        $.ajax({
+          type : "post",
+          url : "/home",
+          data: {csrfmiddlewaretoken: '{{ csrf_token }}',
+                  transcript},
+          success: function(resp){
+          console.log(resp)
+          window.location.href = resp
+          }
+        })
+      
+      }) 
+      btn.addEventListener('click',function(){
+        recognition.start();  
+      })
+
+    </script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

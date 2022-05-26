@@ -93,16 +93,6 @@ def linear3(request):
 
         car=pd.DataFrame([[model,company,year,kms,fuel]],columns=['name','company','year','kms_driven','fuel_type'])
         print(pipe.predict(car)[0])
-        context={
-        "comp":sorted(x['company'].unique()),
-        "models":sorted(x['name'].unique()),
-        "f_type":sorted(x['fuel_type'].unique()),
-        "yop":sorted(x['year'].unique()),
-        "variable":r2_score(y_test,y_pred),
-        "graph":data,  
-        "pred1":pipe.predict(car) 
-          
-        }
        
         return HttpResponse(pipe.predict(car)[0])     
     else:
@@ -181,5 +171,32 @@ def home(request):
 
 def intro(request):
     return render(request,'intro.html')
+
+def chart(request):
+    car = pd.read_csv("static/Cleaned Car.csv",index_col=[0])
+    x=car.drop(columns="Price")#dependent variable
+    y=car["Price"]
+    ohe=OneHotEncoder()
+    ohe.fit_transform(x[['name','company','fuel_type']])
+    column_trans=make_column_transformer((OneHotEncoder(categories=ohe.categories_),['name','company','fuel_type']),remainder="passthrough")
+    x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=433)##Controls the shuffling applied to the data before applying the split. Pass an int for reproducible output across
+    lr=LinearRegression()
+    pipe=make_pipeline(column_trans,lr)
+    pipe.fit(x_train,y_train)
+    y_pred=pipe.predict(x_test)
+    r2_score(y_test,y_pred)
+    fig = plt.figure(figsize=(9,11))
+    plt.scatter(y_test,y_pred)
+    m, b = np.polyfit(y_test, y_pred, 1)
+    plt.plot(y_test,y_test*m+b)
+    imgdata = StringIO()
+    fig.savefig(imgdata, format='svg')
+    imgdata.seek(0)
+    data = imgdata.getvalue()
+    context={
+        "graph":data,        
+        }   
+        
+    return render(request,'chart.html',context)
 
 # Create your views here.
