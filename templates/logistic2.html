@@ -3,12 +3,252 @@
 <div class="container">
 {% block body %}
 
-<h2 style="margin-left:950px;margin-top: 90px;position:absolute;">{{variable}}</h2>
+<h2 style="margin-left:950px;margin-top: 90px;">{{variable}}</h2>
 
-<div style="margin-left:20px; margin-top:-50px;">
-
+<div class="container bg-light rounded-3 w-50">
+    <form method="POST" action="/logistic">
+        {% csrf_token %}
+  <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label  fs-3 text-dark fw-light">Gender</label>
+  <div class="form-check">
+      <input  class="form-check-input" type="radio" name="flexRadioDefault" id="m" value="1">
+      <label  class="form-check-label" for="flexRadioDefault1">
+        Male
+      </label>
+    </div>
+    <div class="form-check">
+        <input  class="form-check-input" type="radio" name="flexRadioDefault" id="f" value="0">
+        <label  class="form-check-label" for="flexRadioDefault1">
+        Female
+      </label>
+    </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label fs-3 text-dark fw-light">Married</label>
+    <div class="form-check">
+      <input  class="form-check-input" type="radio" name="married"  id="mar">
+      <label  class="form-check-label">
+        Yes
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="married"  id="unm">
+      <label  class="form-check-label"  >
+        No
+      </label>
+    </div>
+    </div>
+    <div class="dropdown">
+        <label for="exampleInputEmail1" class="form-label  fs-3 text-dark fw-light">Dependents</label>
+        <br>
+      <button class="btn btn-secondary dropdown-toggle " type="button" id="dep" data-bs-toggle="dropdown" >
+          Dependents
+      </button>
+      <ul class="dropdown-menu" >
+        <li><a class="dropdown-item" id="dep1">0</a></li>
+        <li><a class="dropdown-item" id="dep2">1</a></li>
+        <li><a class="dropdown-item" id="dep3">2</a></li>
+        <li><a class="dropdown-item" id="dep4">3+</a></li>
+      </ul>
+    </div>
+    <br>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label fs-3 text-dark fw-light">Education</label>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="edu" id="grad">
+      <label  class="form-check-label" >
+        Graduate
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="edu" id="ungrad">
+      <label  class="form-check-label" >
+        Ungraduate
+      </label>
+    </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label fs-3 text-dark fw-light">Self_Employed</label>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="employ" id="self">
+      <label  class="form-check-label" >
+        Yes
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="employ" id="selfno">
+      <label  class="form-check-label" >
+        No
+      </label>
+    </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label fs-3 text-dark fw-light">Applicant Income</label>
+      <input style="margin:auto;" type="number" class="form-control css" id="inc">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label fs-3 text-dark fw-light">Co_Applicant_Income</label>
+      <input style="margin:auto;" type="number" class="form-control css" id="co_inc">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label fs-3 text-dark fw-light">Loan Amount</label>
+      <input style="margin:auto;" type="number" class="form-control css" id="loanam">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label fs-3 text-dark fw-light">Loan Amount Term In days</label>
+      <input style="margin:auto;" type="number" class="form-control css" id="loanterm">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label fs-3 text-dark fw-light">Credit History</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="credit" id="cred1">
+        <label  class="form-check-label" >
+          Paid
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="credit" id="cred2">
+        <label  class="form-check-label" >
+          Unpaid
+        </label>
+      </div>
+    </div>
+    <div class="dropdown">
+        <label for="exampleInputPassword1" class="form-label fs-3 text-dark fw-light">Property Value</label>
+        <br>
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" >
+          Property Area
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+        <li><a class="dropdown-item" id="rural">Rural</a></li>
+        <li><a class="dropdown-item" id="urban">Urban</a></li>
+        <li><a class="dropdown-item" id="surban">Semiurban</a></li>
+      </ul>
+    </div>
+    <br>
+  <input type="button" class="btn btn-primary" id="logbtn" value="Submit"></input>
+</form>
+<br>
+<label for="exampleInputPassword1" class="form-label fs-3 text-dark fw-light">Loan Status :{{result2}}</label>
 
 </div>
+<br>
+</div>
+<script>
+    console.log("asd")
+    var gender
+    var married
+    var dependent
+    var graduate
+    var selfemp
+    var income
+    var co_applicant
+    var loanamount
+    var loanterm
+    var credit 
+    var property
+    $("#m").click(function(){
+        gender = 1
+        console.log(gender)
+      })
+      $("#f").click(function(){
+        gender = 0
+        console.log(gender)
+      })
+      $("#mar").click(function(){
+        married = 1
+        console.log(married)
+      })
+      $("#unm").click(function(){
+        married = 0
+        console.log(married)
+      })
+      $("#dep1").click(function(){
+          dependent=0
+        console.log(dependent)
+      })
+      $("#dep2").click(function(){
+        dependent=1
+      console.log(dependent)
+    })
+    $("#dep3").click(function(){
+        dependent=2
+      console.log(dependent)
+    })
+    $("#dep4").click(function(){
+        dependent=3
+      console.log(dependent)
+    })
+    $("#grad").click(function(){
+    graduate=1
+      console.log(graduate)
+    })
+    $("#ungrad").click(function(){
+      graduate=0
+      console.log(graduate)
+    })
+    $("#self").click(function(){
+        selfemp=1
+      console.log(selfemp)
+    })
+    $("#selfno").click(function(){
+        selfemp=0
+      console.log(selfemp)
+    })
+    $("#cred1").click(function(){
+      credit=1
+    console.log(credit)
+  })
+  $("#cred2").click(function(){
+    credit=0
+  console.log(credit)
+})
+$("#rural").click(function(){
+  property=0
+console.log(property)
+})
+$("#urban").click(function(){
+  property=2
+console.log(property)
+})
+$("#surban").click(function(){
+  property=1
+console.log(property)
+})
+    $("#logbtn").click(function(){
+      income = document.getElementById("inc").value
+      co_applicant = document.getElementById("co_inc").value
+      loanamount = document.getElementById("loanam").value
+      loanterm = document.getElementById("loanterm").value
+      console.log(income)
+      $.ajax({
+        type : "post",
+        url : "/logistic2",
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}',
+        income,
+        co_applicant,
+        loanamount,
+        loanterm,
+        property,
+        gender,
+        married,
+        dependent,
+        graduate,
+        selfemp,
+        credit
+                },
+        success: function(resp)
+        {
+            console.log(resp)
+            var k = resp
+           
+        }
+      })
+    
+    })
+    
+    
+</script>
 </div>
 
 {% endblock body %}

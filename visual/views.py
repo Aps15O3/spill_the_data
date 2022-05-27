@@ -128,10 +128,7 @@ def logistic(request):
     return render(request,"logistic.html",context)
 
 def logistic2(request):
-    df=pd.read_csv('static/train.csv')
-    df['LoanAmount'] =df['LoanAmount'].fillna(df['LoanAmount'].mean())
-    df['Credit_History'] = df['Credit_History'].fillna(df['Credit_History'].median())
-    df.dropna(inplace=True)
+    df=pd.read_csv('static/Cleanedloan.csv',index_col=[1])
     df['Loan_Status'].replace('Y',1,inplace=True)
     df['Loan_Status'].replace('N',0,inplace=True)
     df['Loan_Status'].value_counts()
@@ -144,15 +141,40 @@ def logistic2(request):
     X = df.iloc[1:542,1:12].values
     y = df.iloc[1:542,12].values
     X.shape
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3,random_state=0)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,random_state=5712)
+    # score=[]
+    # for i in range(8000):
+    #     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,random_state=i)
+    #     model = LogisticRegression()
+    #     model.fit(X_train,y_train)
+    #     lr_prediction = model.predict(X_test)
+    #     score.append(accuracy_score(lr_prediction,y_test))
     model = LogisticRegression()
     model.fit(X_train,y_train)
     lr_prediction = model.predict(X_test)
-
+    # print(np.argmax(score))
+    print(pd.DataFrame(X_train))
     context={
-        "variable":accuracy_score(lr_prediction,y_test)
+        "variable": accuracy_score(lr_prediction,y_test)
     }   
-    return render(request,"logistic.html",context)
+    if request.method=="POST":
+        gender = int(request.POST.get('gender'))
+        married = int(request.POST.get('married'))
+        dependent = int(request.POST.get('dependent'))
+        graduate = request.POST.get("graduate")
+        selfemp = request.POST.get("selfemp")
+        income = request.POST.get("income")
+        co_applicant = float(request.POST.get("co_applicant"))
+        loanamount = request.POST.get('loanamount')
+        loanterm = request.POST.get("loanterm")
+        credit = float(request.POST.get("credit"))
+        property = request.POST.get("property")
+        print(pd.DataFrame([[gender,married,dependent,graduate,selfemp,income,co_applicant,loanamount,loanterm,credit,property]],columns=['Gender','Married','Dependents','Education','Self_Employed','ApplicantIncome','CoapplicantIncome','LoanAmount','Loan_Amount_term','Credit_History','Property_Area']))
+       
+        a=model.predict(pd.DataFrame([[gender,married,dependent,graduate,selfemp,income,co_applicant,loanamount,loanterm,credit,property]],columns=['Gender','Married','Dependents','Education','Self_Employed','ApplicantIncome','CoapplicantIncome','LoanAmount','Loan_Amount_term','Credit_History','Property_Area']))
+        print(a[0])
+        return HttpResponse()
+    return render(request,"logistic2.html",context)
 
 def home(request):
     transcript = request.POST.get('transcript') 
