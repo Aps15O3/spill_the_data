@@ -33,7 +33,7 @@ def linear(request):
     imgdata.seek(0)
     data = imgdata.getvalue()
     context={
-        'variable':r2_score(y_test, Yp) ,
+        'variable':r2_score(y_test, Yp)*100 ,
         'graph':data
     }
    
