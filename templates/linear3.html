@@ -1,15 +1,140 @@
 {% extends 'base.html' %}
 {% block title %}Linear regression{% endblock title %}
-<div class="container">
+
 {% block body %}
+<div class="container ">
+    <br>
+<div class="bg-light rounded-3 text-center fs-4 p-2">
+    <h2 class="display-4">Linear Regression</h2>
+    Linear Regression is a machine learning algorithm based on supervised learning. It performs a regression task. Regression models a target prediction value based on independent variables. It is mostly used for finding out the relationship between variables and forecasting. Different regression models differ based on – the kind of relationship
+     between dependent and independent variables they are considering, and the number of independent variables getting used.
+     Linear regression performs the task to predict a dependent variable value (y) based on a given independent variable (x). So, this regression technique finds out a 
+     linear relationship between x (input) and y(output). Hence, the name is Linear Regression.</div>
 
-<h2 style="margin-left:950px;margin-top: 90px;" id="h">{{variable}}
+<br>
+<div class="bg-light rounded-3 text-center fs-4 p-2">
+    <h2 class="display-4">An Example Of Linear regression Model</h2>
+    An example of linear regression model using a datbase to find out price  of a car based various factors like model, company ,year, kms_drive etc.
+    </div>
+
+<br>
+<center>
+<div class="row">
    
-</h2>
+<img class="w-50 col-md-6" src="/static/linear3imp.png"></img>
+<div class="col-md-6 bg-light rounded-3 fs-4">Importing pandas to perform data cleaning in the datasets
+    <br>Importing linear regression model from sklearn<br>
+    Traintestsplit to split our data to training and testing respectively<br>
+    Importing One Hot Encoder to encode the data in the form of 0's and 1's<br>
+    Importing column transformer to transform the columns in the form of encoded data<br>
+    Iporting pipeline to apply the column transform to the data 
+    r2 score to check the correctness of our data
+    for data visualisation
+</div>
+<center>
+    
+    <br>
+    <center>
+        <div class="row">
+        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:90px;"> 
+            Reading the database
+        </div>
+        <img class="w-50 col-md-6" src="/static/linear3read.png"></img>
+        <center>
+            <br>
+                    <center>
+                        <div class="row">
+                        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:0px;"> 
+                            The X variable contains all the independent values 
+                            <br>
+                            The Y variable contains the dependent variable which has to be predicted
+                        </div>
+                        <img class="w-50 col-md-6" src="/static/linear3xy.png"></img>
+                        <center>
+                            <br>
+                            <br>
+                    <center>
+                        <div class="row">
+                            <img class="w-50 col-md-6" src="/static/linear3train.png"></img>
+                        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:0px;"> 
+                            Dividing the data into training and testing data  
+                            <br>
+                            Fitting data in LinearRegression model to train our machine
+                        </div>
+                        
+                        <center>
+                            <br>
+                            <br>
+                            <center>
+                                <div class="row">
+                                    
+                                <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:0px;"> 
+                                   Code to fit the data in one hot encoder to transform it into 0's and 1's form
+                                </div>
+                                <img class="w-50 col-md-6" src="/static/linear3ohe.PNG"></img>
+                                
+                                <center>
+                                    <br>
+                                    <br>
+                                    <center>
+                                        <div class="row">
+                                            <img class="w-50 col-md-6" src="/static/linear3trans.PNG"></img>
+                                        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:5px;"> 
+                                           Code to create a column transformer using sklearn column_transform and by passing the 
+                                           One Hot Encoder model into it
+                                        </div>
+                                        
+                                        <center>
+                                            <br>
+                                            <br>
+                                            <center>
+                                                <div class="row">
+                                                   
+                                                <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:5px;"> 
+                                                    Creating a linear regression model and passing it into the created pipeline along
+                                                    with the column transformer. After, that passing the training data into the pipeline which
+                                                    will first transform the data using column transform and then passing the data to regression model
 
-<br><br>
+                                                </div>
+                                                <img class="w-50 col-md-6" src="/static/linear3pipe.PNG"></img>
+                                                
+                                                <center>
+                                                    <br> 
+                                                    <br>
+                                                    <center>
+                                                        <div class="row">
+                                                            <img class="w-50 col-md-6" src="/static/linear3pred.PNG"></img>
+                                                        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:5px;"> 
+                                                            Passing the y_test into the model using predict method
+                                                            then using r2_score method to get R2_score
+                                                        </div>
+                                                        
+                                                        
+                                                        <center>
+                                                            <br>
+                                                            <center>
+                                                                <br> 
+                                                                <br>
+                                                                <center>
+                                                                    <div class="row">
+                                                                        
+                                                                    <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:5px;"> 
+                                                                        Getting the plot along with the line of best fit
+                                                                    </div>
+                                                                    <img class="w-50 col-md-6" src="/static/linear3plot.PNG"></img>
+                                                                    
+                                                                    
+                                                                    <center>
+                                                                        <br>
+                                            <input type="button" class="btn btn-primary" id="linearbtn" value="Click To See Graph And R2_score">
+                            <br>
+                            <div class="row p-3" id="graphlinear">
+                                <div class="col-md-6">{{graph|safe}}</div>
+                                <div class="col-md-6 h-50 display-6 bg-light rounded-3 p-0" style="margin-top:170px;"> R2_Score :- {{variable}}</div>
+                            </div>
+                            <br>    
 <div class="jumbotron bg-light rounded-3 p-3 text-center" >
-    <h2>{{model}}</h2>
+       
 <form method="POST" action="/linear3">
     {% csrf_token %}
     <label class="form-label">Select company</label>
@@ -54,6 +179,10 @@
 </div>
 </div>
 <script>
+    $("#graphlinear").hide()
+    $("#linearbtn").click(function(){
+        $("#graphlinear").fadeToggle(500);
+    })
 function load123(comp_id)
 {
     var company = document.getElementById(comp_id);

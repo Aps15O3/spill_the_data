@@ -1,14 +1,150 @@
 {% extends 'base.html' %}
 {% block title %}Linear regression{% endblock title %}
-<div class="container">
+
 {% block body %}
+<div class="container ">
+    <br>
+<div class="bg-light rounded-3 text-center fs-4 p-2">
+    <h2 class="display-4">Linear Regression</h2>
+    Linear Regression is a machine learning algorithm based on supervised learning. It performs a regression task. Regression models a target prediction value based on independent variables. It is mostly used for finding out the relationship between variables and forecasting. Different regression models differ based on – the kind of relationship
+     between dependent and independent variables they are considering, and the number of independent variables getting used.
+     Linear regression performs the task to predict a dependent variable value (y) based on a given independent variable (x). So, this regression technique finds out a 
+     linear relationship between x (input) and y(output). Hence, the name is Linear Regression.</div>
 
-<h2 style="margin-left:950px;margin-top: 90px;position:absolute;">The Accuracy of the Algorithm is<br>{{variable}}</h2>
+<br>
+<div class="bg-light rounded-3 text-center fs-4 p-2">
+    <h2 class="display-4">An Example Of Linear regression Model</h2>
+    An example of linear regression model using a datbase to find out profit of a startup based various factors like R&D spend, marketing etc.
+    </div>
 
-<div style="margin-left:20px; margin-top:-50px;">
-{{graph|safe}}
+<br>
+<center>
+<div class="row">
+   
+<img class="w-50 col-md-6" src="/static/linearreading.png"></img>
+<div class="col-md-6 bg-light rounded-3 fs-4">Importing pandas to perform data cleaning in the datasets
+    <br>Importing linear regression model from sklearn<br>
+    Traintestsplit to split our data to training and testing respectively<br>
+    r2 score to check the correctness of our data
+    for data visualisation
+</div>
+<center>
+    
+    <br>
+    <center>
+        <div class="row">
+        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:90px;"> 
+            Reading the database
+        </div>
+        <img class="w-50 col-md-6" src="/static/linearread.png"></img>
+        <center>
+            <br>
+            <center>
+                <div class="row">
+                    <img class="w-50 col-md-6" src="/static/linearcor.png"></img>
+                <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:200px;"> 
+                    Heatmap to show correlation betweeen the data
+                </div>
+                
+                <center>
+                    <br>
+                    <center>
+                        <div class="row">
+                        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:0px;"> 
+                            The X variable contains all the independent values 
+                            <br>
+                            The Y variable contains the dependent variable which has to be predicted
+                        </div>
+                        <img class="w-50 col-md-6" src="/static/linearxy.png"></img>
+                        <center>
+                            <br>
+                            <br>
+                    <center>
+                        <div class="row">
+                            <img class="w-50 col-md-6" src="/static/linearreg.png"></img>
+                        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:30px;"> 
+                            Dividing the data into training and testing data  
+                            <br>
+                            Fitting data in Linear Regression model to train our machine
+                        </div>
+                        
+                        <center>
+                            <br>
+                            <br>
+                            <center>
+                                <div class="row">
+                                    
+                                <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:10px;"> 
+                                   Code to check R2_score
+                                </div>
+                                <img class="w-50 col-md-6" src="/static/linearlscore.PNG"></img>
+                                
+                                <center>
+                                    <br>
+                                    <br>
+                                    <center>
+                                        <div class="row">
+                                            <img class="w-50 col-md-6" src="/static/lineargraph.PNG"></img>
+                                        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:5px;"> 
+                                           Code to see scatter plot with line of best fit
+                                        </div>
+                                        
+                                        <center>
+                                            <br>
+                                            <input type="button" class="btn btn-primary" id="linearbtn" value="Click To See Graph And R2_score">
+                            <br>
+                            <div class="row p-3" id="graphlinear">
+                                <div class="col-md-6">{{graph|safe}}</div>
+                                <div class="col-md-6 h-50 display-4 bg-light rounded-3" style="margin-top:170px"> R2_Score :- {{variable}}</div>
+                            </div>
+                            <br>
+            <div class="bg-light p-3 rounded-3 ">
+                <label class="form-label">R&D Spend</label>
+                <input type="text" class="form-control" id="rd">
+                <br>
+                <label class="form-label">Administration</label>
+                <input type="text" class="form-control" id="admin">
+                <br>
+                <label class="form-label">Marketing Spend</label>
+                <input type="text" class="form-control" id="market">
+                <br>
+                <input type="button" class="btn btn-primary" id="pred" value="Click To See Predicted">
+                <br>
+                <br>
+                <p class="display-6" id="p"></p>
+                
+            </div>
+            <br>
+</div>
 
 </div>
-</div>
+<script>
+    $("#graphlinear").hide()
+    $("#linearbtn").click(function(){
+        $("#graphlinear").fadeToggle(500);
+    })
+    $("#pred").click(function(){
+        var rd = document.getElementById("rd");
+        var admin = document.getElementById("admin");
+        var market = document.getElementById("market");
+        rd=rd.value;
+        admin = admin.value;
+        market=market.value;
+        $.ajax({
+        type : "post",
+        url : "/linear",
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}',
+        rd,
+        admin,
+        market
+                },
+        success: function(resp)
+        {
+            $("#p").append(resp)
+        }
+      })
+    })
+</script>
+
 
 {% endblock body %}

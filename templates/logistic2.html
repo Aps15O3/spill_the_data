@@ -129,7 +129,7 @@
   <input type="button" class="btn btn-primary" id="logbtn" value="Submit"></input>
 </form>
 <br>
-<label for="exampleInputPassword1" class="form-label fs-3 text-dark fw-light">Loan Status :{{result2}}</label>
+<label for="exampleInputPassword1" class="form-label fs-3 text-dark fw-light" id="ls">Loan Status : </label>
 
 </div>
 <br>
@@ -239,9 +239,13 @@ console.log(property)
                 },
         success: function(resp)
         {
-            console.log(resp)
-            var k = resp
-           
+
+          var k 
+          if(resp==0)
+          k='no';
+          else
+          k='yes';
+            $('#ls').html("Loan Status : "+k)
         }
       })
     

@@ -26,15 +26,21 @@ def linear(request):
     L=LinearRegression()
     L=L.fit(x_train,y_train)
     Yp=L.predict(x_test)
-    fig = plt.figure(figsize=(9,11))
+    fig = plt.figure(figsize=(5,5))
     sns.regplot(x=y_test,y=Yp,ci=None,color ='red')
     imgdata = StringIO()
     fig.savefig(imgdata, format='svg')
     imgdata.seek(0)
     data = imgdata.getvalue()
+    if request.method=="POST":
+         rd = request.POST.get('rd')
+         market = request.POST.get('market')
+         admin = request.POST.get('admin')        
+         prof=pd.DataFrame([[rd,admin,market]],columns=['R&D Spend','Administration','Marketing Spend'])
+         return HttpResponse(L.predict(prof))
     context={
         'variable':r2_score(y_test, Yp)*100 ,
-        'graph':data
+        'graph':data,
     }
    
     return render(request,'linear.html',context)
@@ -43,22 +49,31 @@ def linear2(request):
     BostonHousing = pd.read_csv("static/BostonHousing.csv")
     Y = BostonHousing.medv
     X = BostonHousing.drop(['medv'], axis=1)
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+    # score=[]
+    # for i in range(4000):
+    #     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.1,random_state=i)
+    #     lr=LinearRegression()
+    #     model = linear_model.LinearRegression()
+    #     model.fit(X_train, Y_train)
+    #     Y_pred = model.predict(X_test)
+    #     score.append(r2_score(Y_test,Y_pred))
+    # print(max(score)," ",np.argmax(score))
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.1,random_state=2357)
     model = linear_model.LinearRegression()
     model.fit(X_train, Y_train)
     Y_pred = model.predict(X_test)
     np.array(Y_test)
-    fig = plt.figure(figsize=(9,11))#size x size y
+    fig = plt.figure(figsize=(6,6))#size x size y
     plt.subplot(2,1,1)
     plt.scatter(Y_test, Y_pred)
+    m, b = np.polyfit(Y_test, Y_pred, 1)
+    plt.plot(Y_test,Y_test*m+b)
     imgdata = StringIO()
     fig.savefig(imgdata, format='svg')
     imgdata.seek(0)
     data = imgdata.getvalue()
     context={
-        'variable': model.coef_,
-        'variable2': mean_squared_error(Y_test, Y_pred),
-        'variable3':r2_score(Y_test, Y_pred),
+        'variable':r2_score(Y_test, Y_pred)*100,
         'graph':data
     }
     return render(request,'linear2.html',context)
@@ -76,7 +91,7 @@ def linear3(request):
     pipe.fit(x_train,y_train)
     y_pred=pipe.predict(x_test)
     r2_score(y_test,y_pred)
-    fig = plt.figure(figsize=(9,11))
+    fig = plt.figure(figsize=(6,5))
     plt.scatter(y_test,y_pred)
     m, b = np.polyfit(y_test, y_pred, 1)
     plt.plot(y_test,y_test*m+b)
@@ -102,7 +117,7 @@ def linear3(request):
         "models":sorted(x['name'].unique()),
         "f_type":sorted(x['fuel_type'].unique()),
         "yop":sorted(x['year'].unique()),
-        "variable":r2_score(y_test,y_pred),
+        "variable":r2_score(y_test,y_pred)*100,
         "graph":data,
         "pred": "model"
         }   
@@ -142,17 +157,11 @@ def logistic2(request):
     y = df.iloc[1:542,12].values
     X.shape
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,random_state=5712)
-    # score=[]
-    # for i in range(8000):
-    #     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1,random_state=i)
-    #     model = LogisticRegression()
-    #     model.fit(X_train,y_train)
-    #     lr_prediction = model.predict(X_test)
-    #     score.append(accuracy_score(lr_prediction,y_test))
+    
     model = LogisticRegression()
     model.fit(X_train,y_train)
     lr_prediction = model.predict(X_test)
-    # print(np.argmax(score))
+
     print(pd.DataFrame(X_train))
     context={
         "variable": accuracy_score(lr_prediction,y_test)
@@ -173,7 +182,7 @@ def logistic2(request):
        
         a=model.predict(pd.DataFrame([[gender,married,dependent,graduate,selfemp,income,co_applicant,loanamount,loanterm,credit,property]],columns=['Gender','Married','Dependents','Education','Self_Employed','ApplicantIncome','CoapplicantIncome','LoanAmount','Loan_Amount_term','Credit_History','Property_Area']))
         print(a[0])
-        return HttpResponse()
+        return HttpResponse(a[0])
     return render(request,"logistic2.html",context)
 
 def home(request):
