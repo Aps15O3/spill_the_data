@@ -11,6 +11,6 @@ urlpatterns = [
     path('logistic',views.logistic),
     path('logistic2',views.logistic2),
     path('intro',views.intro),
-    path('chart',views.chart)
+    path('logistic3',views.logistic3)
 
 ]

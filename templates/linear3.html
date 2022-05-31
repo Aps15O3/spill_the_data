@@ -150,7 +150,7 @@
 
     </select>
     <br>
-    <label class="form-label">Year Of Purchase</label>
+    <label class="form-label">Year</label>
     <select class="form-select" id="year_id" required>
         <option value=""></option>
         {%for year in yop%}
@@ -161,9 +161,11 @@
     <label class="form-label">Fuel Type</label>
     <select class="form-select" id="fuel_id" required>
         <option value=""></option>
-        {%for fuel in f_type%}
-        <option value="{{fuel}}">{{fuel}}</option>
-        {%endfor%}
+        
+        <option value="LPG">CNG</option>
+        <option value="Petrol">Petrol</option>
+        <option value="Diesel">Diesel</option>
+    
     </select>
     <br>
     <label class="form-label">Kms Driven</label>

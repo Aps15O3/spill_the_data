@@ -1,11 +1,89 @@
 {% extends 'base.html' %}
 {% block title %}Linear regression{% endblock title %}
-<div class="container">
+
 {% block body %}
+<div class="container ">
+  <br>
+<div class="bg-light rounded-3 text-center fs-4 p-2">
+  <h2 class="display-4">Logistic Regression</h2>
+  Logistic regression is a statistical analysis method to predict a binary outcome, such as yes or no, based on prior observations of a data set.
+  A logistic regression model predicts a dependent data variable by analyzing the relationship between one or more existing independent variables. For example, a logistic regression could be used to predict whether a political candidate will win or lose an election or whether a high school student will be admitted or not to a particular college. 
+  These binary outcomes allow straightforward decisions between two alternatives.
+  A logistic regression model can take into consideration multiple input criteria. 
+  In the case of college acceptance, the logistic function could consider factors such as the student's grade point average, SAT score and number of extracurricular activities. Based on historical data about earlier outcomes involving the same input criteria, 
+  it then scores new cases on their probability of falling into one of two outcome categories</div>
 
-<h2 style="margin-left:950px;margin-top: 90px;">{{variable}}</h2>
+<br>
+<div class="bg-light rounded-3 text-center fs-4 p-2">
+  <h2 class="display-4">An Example Of Logistic regression Model</h2>
+  An example of logistic regression model using a database to find which person will get a loan based on factors
+  like gender, graduate, maritial status, property value etc.
+  </div>
 
-<div class="container bg-light rounded-3 w-50">
+<br>
+<center>
+<div class="row">
+ 
+<img class="w-50 col-md-6" src="\static\logistic2import.png"></img>
+<div class="col-md-6 bg-light rounded-3 fs-4">Importing pandas to perform data cleaning in the datasets
+  <br>Importing logistic regression model from sklearn<br>
+  Traintestsplit to split our data to training and testing respectively<br>
+  r2-score to check the correctness of our data fro data visualization
+</div>
+<center>
+  
+  <br>
+  <center>
+      <div class="row">
+      <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:20px;"> 
+          Reading the database
+      </div>
+      <img class="w-50 col-md-6" src="\static\logistic2read.png"></img>
+      <center>
+                  <br>
+                  <center>
+                      <div class="row">
+                      <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:0px;"> 
+                          The X variable contains all the independent values 
+                          <br>
+                          The Y variable contains the dependent variable which has to be predicted
+                      </div>
+                      <img class="w-50 col-md-6" src="\static\logistic2xy.png"></img>
+                      <center>
+                          <br>
+                          <br>
+                  <center>
+                      <div class="row">
+                          <img class="w-50 col-md-6" src="\static\logistic2xy.png"></img>
+                      <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:30px;"> 
+                          Dividing the data into training and testing data  
+                          <br>
+                          Fitting data in Logistic Regression model to train our machine
+                      </div>
+                      
+                      <center>
+                          <br>
+                          <br>
+                          <center>
+                              <div class="row">
+                                  
+                              <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:10px;"> 
+                                 Code to check Accuracy score
+                              </div>
+                              <img class="w-50 col-md-6" src="\static\logistic2score.png"></img>
+                              
+                              <center>
+                                  <br>
+                                 
+                                          <input type="button" class="btn btn-primary" id="linearbtn" value="Click To See Accuracy score">
+                          <br>
+                          <div class="row p-3" id="graphlinear">
+                              <center>
+                              <div class="col-md-6  display-4 bg-light rounded-3" style="margin-top:20px "> Acurracy Score :- {{variable}}</div>
+                          </div>
+                          <br>
+
+<div class="container bg-light text-start rounded-3 w-50">
     <form method="POST" action="/logistic">
         {% csrf_token %}
   <div class="mb-3">
@@ -135,6 +213,10 @@
 <br>
 </div>
 <script>
+  $("#graphlinear").hide()
+  $("#linearbtn").click(function(){
+      $("#graphlinear").fadeToggle(500);
+  })
     console.log("asd")
     var gender
     var married

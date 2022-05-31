@@ -133,10 +133,12 @@ def logistic(request):
     temp.drop(['State'],axis=1,inplace=True)
     X=temp.drop(['Profit'],axis=1)
     Y=temp['States']
-    x_train,x_test,y_train,y_test=train_test_split(X,Y,test_size=0.3,random_state=2127)
+    x_train,x_test,y_train,y_test=train_test_split(X,Y,test_size=0.25,random_state=2202)
     L=LogisticRegression()
     L.fit(x_train,y_train)
     L=L.predict(x_test)
+    
+    
     context={
         "variable":accuracy_score(y_test,L)*100
     }   
@@ -186,16 +188,28 @@ def logistic2(request):
     return render(request,"logistic2.html",context)
 
 def home(request):
-    transcript = request.POST.get('transcript') 
-    if transcript=="show me an example of linear regression" or transcript=="Show me an example of linear regression.":
-     
-        return HttpResponse("linear")
-    elif transcript=="show me another example of linear regression" or transcript=="linear regression example 2":
-        return HttpResponse("linear2")
-    elif transcript=="linear regression example 3":
-        return HttpResponse("linear3")
-    elif transcript=="tell me about machine learning":
-        return HttpResponse("intro")        
+    if request.method=="POST":
+        transcript = request.POST.get('transcript') 
+        transcript=transcript.lower()
+        print(transcript)
+    
+        if transcript=="show me an example of linear regression" or transcript=="I want to see an example of linear regression":
+         
+            return HttpResponse("linear")
+        elif transcript=="show me another example of linear regression" or transcript=="show me linear regression example 2":
+            return HttpResponse("linear2")
+        elif transcript=="show me linear regression example 3":
+            return HttpResponse("linear3")
+        elif transcript=="tell me about machine learning":
+            return HttpResponse("intro") 
+        elif transcript=="home" or transcript=="take me back to homepage" or transcript=="take me to homepage"  or transcript=="take me to home page" or transcript=="take me back to home page":
+            return HttpResponse("home")        
+        elif transcript=="show me an example of logistic regression":
+            return HttpResponse("logistic") 
+        elif transcript=="show me logistic regression example 2" or transcript=="show me logistic regression example to":
+            return HttpResponse("logistic2")
+        elif transcript=="show me logistic regression example 3":
+            return HttpResponse("logistic3")
     
     return render(request,'home.html')
 
@@ -229,5 +243,23 @@ def chart(request):
         }   
         
     return render(request,'chart.html',context)
+
+def logistic3(request):
+    df = pd.read_csv('static/HDprediction_data.csv')
+    df = df.dropna().drop_duplicates().reset_index(drop=True)
+    array = df.values
+    X = array[:,0:df.shape[1]-1] #in
+    Y = array[:,df.shape[1]-1] #out
+
+# split between train and Test Sets
+    X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size=0.33,random_state=7,shuffle=True)
+
+# Logistic regression model
+    LR = LogisticRegression(solver='liblinear', random_state=0)
+    LR.fit(X_train, Y_train) 
+    context={
+        "variable":LR.score(X_test, Y_test)*100
+    }   
+    return render(request,"logistic3.html",context)
 
 # Create your views here.
