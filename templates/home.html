@@ -113,7 +113,7 @@
           <br>
       <p><a class="btn btn-secondary" href="/logistic">Logistic Regression Example 1</a></p>
       <p><a class="btn btn-secondary" href="/logistic2">Logistic Regression Example 2</a></p>
-      <p><a class="btn btn-secondary" href="#">Logistic Regression Example 3</a></p>
+      <p><a class="btn btn-secondary" href="/logistic3">Logistic Regression Example 3</a></p>
       <br>
       </div>
     </div><!-- /.col-lg-4 -->
@@ -132,87 +132,6 @@
     </div><!-- /.col-lg-4 -->
   </div><!-- /.row -->
 
-{% comment %} <br><br>
-<div class="container row">
-<div class="card col-sm-2" style="width: 25rem;text-align: justify;">
-    <img src="https://www.digitalvidya.com/wp-content/uploads/2019/03/Linear-Regression.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title" style="font-size:30px;margin-left: 50px;">Linear Regression</h5>
-      <p class="card-text" style="font-size:20px;">Linear regression analysis is used to predict the value of a variable based on the value of another variable.</p>
-      <a href="/linear" class="btn btn-primary" style="margin-left:100px;">Linear regression&nbsp;&nbsp;&nbsp;</a>
-      <br><br>
-      <a href="/linear2" class="btn btn-primary" style="margin-left:100px;">Linear regression 2</a>
-      <br><br>
-      <a href="/linear3" class="btn btn-primary" style="margin-left:100px;">Linear regression 3</a>
-    </div>
-  </div>
-  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-  <div class="card col-sm-2" style="width: 25rem;text-align: justify;">
-    <img src="https://www.digitalvidya.com/wp-content/uploads/2019/03/Linear-Regression.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title" style="font-size:30px;margin-left: 50px;">Linear Regression</h5>
-      <p class="card-text" style="font-size:20px;">Linear regression analysis is used to predict the value of a variable based on the value of another variable.</p>
-      <a href="/linear" class="btn btn-primary" style="margin-left:100px;">Linear regression&nbsp;&nbsp;&nbsp;</a>
-      <br><br>
-      <a href="/linear2" class="btn btn-primary" style="margin-left:100px;">Linear regression 2</a>
-      <br><br>
-      <a href="/linear3" class="btn btn-primary" style="margin-left:100px;">Linear regression 3</a>
-    </div>
-  </div>
-  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-  <div class="card col-sm-6" style="width: 25rem;text-align: justify;">
-    <img src="https://www.digitalvidya.com/wp-content/uploads/2019/03/Linear-Regression.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title" style="font-size:30px;margin-left: 50px;">Linear Regression</h5>
-      <p class="card-text" style="font-size:20px;">Linear regression analysis is used to predict the value of a variable based on the value of another variable.</p>
-      <a href="/linear" class="btn btn-primary" style="margin-left:100px;">Linear regression&nbsp;&nbsp;&nbsp;</a>
-      <br><br>
-      <a href="/linear2" class="btn btn-primary" style="margin-left:100px;">Linear regression 2</a>
-      <br><br>
-      <a href="/linear3" class="btn btn-primary" style="margin-left:100px;">Linear regression 3</a>
-    </div>
-  </div>
-  
-
-</div> {% endcomment %}
-
-<script>
-{% comment %} const btn = document.getElementById("btn"); 
-var speech = true;
-window.SpeechRecognition = window.SpeechRecognition
-        || window.webkitSpeechRecognition;
-
-const recognition = new SpeechRecognition();
-recognition.interimResults = true;
-var transcript="abcd"
-
-recognition.addEventListener('result', e => {
-  transcript = Array.from(e.results)
-    .map(result => result[0])
-    .map(result => result.transcript)
-    .join('')
-    //console.log(transcript);
-});
-recognition.addEventListener('end',function(){
-  console.log(transcript);
-  
-  console.log(transcript);
-  $.ajax({
-    type : "post",
-    url : "/home",
-    data: {csrfmiddlewaretoken: '{{ csrf_token }}',
-            transcript},
-    success: function(resp){
-    console.log(resp)
-    window.location.href = resp
-    }
-  })
-
-}) 
-btn.addEventListener('click',function(){
-  recognition.start();  
-}) {% endcomment %}
-//The event.result property contains the last/previous value returned by an event handler triggered by the specified event.
 
 </script>
 {% endblock body %}

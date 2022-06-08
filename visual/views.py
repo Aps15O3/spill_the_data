@@ -49,15 +49,7 @@ def linear2(request):
     BostonHousing = pd.read_csv("static/BostonHousing.csv")
     Y = BostonHousing.medv
     X = BostonHousing.drop(['medv'], axis=1)
-    # score=[]
-    # for i in range(4000):
-    #     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.1,random_state=i)
-    #     lr=LinearRegression()
-    #     model = linear_model.LinearRegression()
-    #     model.fit(X_train, Y_train)
-    #     Y_pred = model.predict(X_test)
-    #     score.append(r2_score(Y_test,Y_pred))
-    # print(max(score)," ",np.argmax(score))
+    
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.1,random_state=2357)
     model = linear_model.LinearRegression()
     model.fit(X_train, Y_train)
