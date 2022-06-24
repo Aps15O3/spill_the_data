@@ -17,6 +17,8 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix,accuracy_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
 
 def linear(request):
     a=pd.read_csv('static/50Startups.csv')
@@ -209,32 +211,7 @@ def home(request):
 def intro(request):
     return render(request,'intro.html')
 
-def chart(request):
-    car = pd.read_csv("static/Cleaned Car.csv",index_col=[0])
-    x=car.drop(columns="Price")#dependent variable
-    y=car["Price"]
-    ohe=OneHotEncoder()
-    ohe.fit_transform(x[['name','company','fuel_type']])
-    column_trans=make_column_transformer((OneHotEncoder(categories=ohe.categories_),['name','company','fuel_type']),remainder="passthrough")
-    x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=433)##Controls the shuffling applied to the data before applying the split. Pass an int for reproducible output across
-    lr=LinearRegression()
-    pipe=make_pipeline(column_trans,lr)
-    pipe.fit(x_train,y_train)
-    y_pred=pipe.predict(x_test)
-    r2_score(y_test,y_pred)
-    fig = plt.figure(figsize=(9,11))
-    plt.scatter(y_test,y_pred)
-    m, b = np.polyfit(y_test, y_pred, 1)
-    plt.plot(y_test,y_test*m+b)
-    imgdata = StringIO()
-    fig.savefig(imgdata, format='svg')
-    imgdata.seek(0)
-    data = imgdata.getvalue()
-    context={
-        "graph":data,        
-        }   
-        
-    return render(request,'chart.html',context)
+
 
 def logistic3(request):
     df = pd.read_csv('static/HDprediction_data.csv')
@@ -255,3 +232,21 @@ def logistic3(request):
     return render(request,"logistic3.html",context)
 
 # Create your views here.
+
+def svm(request):
+    dataset = pd.read_csv('static/PurchaseBehavior_data.csv')
+    X = dataset.iloc[:,:-1].values
+    y = dataset.iloc[:,-1].values
+    X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=0)
+    classifier_kernel = SVC(kernel='rbf', random_state=0)
+    classifier_kernel.fit(X_train,y_train)
+    y_pred = classifier_kernel.predict(X_test)
+    context={
+        "score":accuracy_score(y_test, y_pred)*100
+    }
+    if request.method=="POST":
+        age=request.POST.get("age")
+        salary=request.POST.get("salary")
+        pred=classifier_kernel.predict(pd.DataFrame([[age,salary]],columns=['Age','EstimatedSalary']))[0]
+        return HttpResponse(pred)
+    return render(request,"svm.html",context)
