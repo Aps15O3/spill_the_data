@@ -187,14 +187,13 @@ def home(request):
         transcript=transcript.lower()
         print(transcript)
     
-        if transcript=="show me an example of linear regression" or transcript=="I want to see an example of linear regression":
-         
+        if transcript=="show me an example of linear regression" or transcript=="I want to see an example of linear regression":         
             return HttpResponse("linear")
         elif transcript=="show me another example of linear regression" or transcript=="show me linear regression example 2":
             return HttpResponse("linear2")
-        elif transcript=="show me linear regression example 3":
+        elif transcript=="linear regression example 3":
             return HttpResponse("linear3")
-        elif transcript=="tell me about machine learning":
+        elif transcript=="tell me about machine learning" or transcript=="what is machine learning" or transcript=="what is machine learning?":
             return HttpResponse("intro") 
         elif transcript=="home" or transcript=="take me back to homepage" or transcript=="take me to homepage"  or transcript=="take me to home page" or transcript=="take me back to home page":
             return HttpResponse("home")        
@@ -219,16 +218,30 @@ def logistic3(request):
     array = df.values
     X = array[:,0:df.shape[1]-1] #in
     Y = array[:,df.shape[1]-1] #out
-
-# split between train and Test Sets
     X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size=0.33,random_state=7,shuffle=True)
-
-# Logistic regression model
     LR = LogisticRegression(solver='liblinear', random_state=0)
     LR.fit(X_train, Y_train) 
     context={
         "variable":LR.score(X_test, Y_test)*100
     }   
+    if request.method=="POST":
+        male = request.POST.get("male")
+        tcol = request.POST.get("tcol")
+        sysbp = float(request.POST.get("sysbp"))
+        diabp= float(request.POST.get("diabp"))
+        bmi= float(request.POST.get("bmi"))
+        hr= request.POST.get("hr")
+        glu= request.POST.get("glu")
+        age= request.POST.get("age")
+        cs= request.POST.get("cs")
+        cspd= request.POST.get("cspd")
+        bpmed= request.POST.get("bpmed")
+        prevh= request.POST.get("prevh")
+        prevs= request.POST.get("prevs")
+        diab= request.POST.get("diab")
+        a=LR.predict(pd.DataFrame([[male,age,1,cs,cspd,bpmed,prevs,prevh,diab,tcol,sysbp,diabp,bmi,hr,glu]],columns=['male','age','education','currentSmoker','cigsPerDay','BPMeds','prevalentStroke','prevalentHyp','diabetes','totChol','sysBP','diaBP','BMI','heartRate','glucose']))
+        
+        return HttpResponse(a)
     return render(request,"logistic3.html",context)
 
 # Create your views here.

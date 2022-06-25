@@ -103,57 +103,46 @@
                     Gender
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" >Male</a></li>
-                  <li><a class="dropdown-item" >Female</a></li>
+                  <li><a class="dropdown-item" id ="male" value="1">Male</a></li>
+                  <li><a class="dropdown-item" id="f" value="0" >Female</a></li>
                 </ul>
               </div>
               <br>
             <div class="mb-3">
                 <label  class="form-label">Age</label>
-                <input type="text" class="form-control css" >
+                <input type="number" class="form-control css" id="age" >
               </div>
-              <br>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Education
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" >1</a></li>
-              <li><a class="dropdown-item" >2</a></li>
-              <li><a class="dropdown-item" >3</a></li>
-              <li><a class="dropdown-item" >4</a></li>
-            </ul>
-          </div>
+              
           <br>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Current Smoker</label>
           <div class="form-check">
-            <input  class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label  class="form-check-label" for="flexRadioDefault1">
+            <input  class="form-check-input" type="radio" name="flexRadioDefault" id="cy">
+            <label  class="form-check-label" for="flexRadioDefault1" >
               Yes
             </label>
           </div>
           <div class="form-check">
-            <input  class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
+            <input  class="form-check-input" type="radio" name="flexRadioDefault" id="cn">
+            <label class="form-check-label" for="flexRadioDefault1" >
               No
             </label>
           </div>
           </div>
           <div class="mb-3">
             <label  class="form-label">Cigarette Per Day</label>
-            <input style="margin:auto;" type="number" class="form-control css" id="exampleInputPassword1">
+            <input style="margin:auto;" type="number" class="form-control css" id="cigs">
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Blood Pressure Medications</label>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <input class="form-check-input" type="radio" name="flexRadioDefault1" id="bpy">
             <label  class="form-check-label" for="flexRadioDefault1">
               Yes
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <input class="form-check-input" type="radio" name="flexRadioDefault1" id="bpn">
             <label  class="form-check-label" for="flexRadioDefault1">
               No
             </label>
@@ -162,13 +151,13 @@
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Prevalent Stroke</label>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <input class="form-check-input" type="radio" name="flexRadioDefault2" id="psy">
             <label  class="form-check-label" for="flexRadioDefault1">
               Yes
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <input class="form-check-input" type="radio" name="flexRadioDefault2" id="psn">
             <label class="form-check-label" for="flexRadioDefault1">
               No
             </label>
@@ -177,13 +166,13 @@
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Prevalent Hypertension</label>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <input class="form-check-input" type="radio" name="flexRadioDefault3" id="phy">
             <label  class="form-check-label" for="flexRadioDefault1">
               Yes
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <input class="form-check-input" type="radio" name="flexRadioDefault3" id="phn">
             <label  class="form-check-label" for="flexRadioDefault1">
               No
             </label>
@@ -192,13 +181,13 @@
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Diabetes</label>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <input class="form-check-input" type="radio" name="flexRadioDefault4" id="dy">
             <label  class="form-check-label" for="flexRadioDefault1">
               Yes
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <input class="form-check-input" type="radio" name="flexRadioDefault4" id="dn">
             <label  class="form-check-label" for="flexRadioDefault1">
               No
             </label>
@@ -206,48 +195,34 @@
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Total Cholesterol</label>
-            <input style="margin:auto;" type="text" class="form-control css" id="exampleInputPassword1">
+            <input style="margin:auto;" type="number" class="form-control css" id="chol">
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label"> Systolic Blood Pressure</label>
-            <input style="margin:auto;" type="text" class="form-control css" id="exampleInputPassword1">
+            <input style="margin:auto;" type="number" class="form-control css" id="sbp">
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Diastolic Blood Pressure</label>
-            <input style="margin:auto;" type="text" class="form-control css" id="exampleInputPassword1">
+            <input style="margin:auto;" type="number" class="form-control css" id="dbp">
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">BMI</label>
-            <input style="margin:auto;" type="text" class="form-control css" id="exampleInputPassword1">
+            <input style="margin:auto;" type="number" class="form-control css" id="bmi">
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Heart Rate</label>
-            <input style="margin:auto;" type="text" class="form-control css" id="exampleInputPassword1">
+            <input style="margin:auto;" type="number" class="form-control css" id="hr">
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Glucose</label>
-            <input style="margin:auto;" type="text" class="form-control css" id="exampleInputPassword1">
+            <input style="margin:auto;" type="number" class="form-control css" id="gluc">
           </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Ten Year Child</label>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label  class="form-check-label" for="flexRadioDefault1">
-              Yes
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label  class="form-check-label" for="flexRadioDefault1">
-              No
-            </label>
-          </div>
-          </div>
+          
           <br>
-        <button type="submit" class="btn btn-primary">Submit</button>
+          <input type="button" class="btn btn-primary" id="logbtn" value="Submit"></input>
       </form>
       <br>
-     <p>Heart Disease :</p>
+     <p id="p">Heart Disease :</p>
      <br>   
      
     </div>
@@ -262,6 +237,116 @@
     $("#linearbtn").click(function(){
         $("#graphlinear").fadeToggle(500);
     })
+var male
+var age
+var cs
+var cspd
+var bpmed
+var prevs
+var prevh
+var diab
+var tcol
+var sysbp
+var diabp
+var bmi
+var hr
+var glu 
+    $("#male").click(function(){
+      male=1
+    })
+    $("#f").click(function(){
+      male=0
+    })
+    $("#cy").click(function(){
+      cs=1
+    })
+    $("#cn").click(function(){
+      cs=0
+    })
+    $("#bpy").click(function(){
+      bpmed=1
+    })
+    $("#bpn").click(function(){
+      bpmed=0
+    })
+    $("#psy").click(function(){
+      prevs=1
+    })
+    $("#psn").click(function(){
+      prevs=0
+    })
+    $("#phy").click(function(){
+      prevh=1
+    })
+    $("#phn").click(function(){
+      prevh=0
+    })
+    $("#dy").click(function(){
+      diab=1
+    })
+    $("#dn").click(function(){
+      diab=0
+    })
+    $("#logbtn").click(function(){
+      age=document.getElementById("age").value
+      tcol=document.getElementById("chol").value
+      sysbp=document.getElementById("sbp").value
+      diabp=document.getElementById("dbp").value
+      bmi=document.getElementById("bmi").value
+      hr=document.getElementById("hr").value
+      glu=document.getElementById("gluc").value
+      cspd=document.getElementById("cigs").value
+      console.log(age,
+      tcol,
+      sysbp,
+      diabp,
+      bmi,
+      hr,
+      glu,
+      male,
+      cs,
+      cspd,
+      bpmed,
+      prevh,
+      prevs,
+      diab)
+      $.ajax({
+        type : "post",
+        url : "/logistic3",
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}',
+        age,
+        tcol,
+        sysbp,
+        diabp,
+        bmi,
+        hr,
+        glu,
+        male,
+        cs,
+        cspd,
+        bpmed,
+        prevh,
+        prevs,
+        diab
+                },
+        success: function(resp)
+        {
+          p=resp
+          if(p==0){
+            $('#p').html("");
+            $('#p').append("Heart Disease :No")
+          }
+          else{
+            $('#p').html("");
+            $('#p').append("Heart Disease :Yes")            
+          }
+      }
+    })
+    
+    
+    })
+
+
 </script>
 
 {% endblock body %}
