@@ -83,12 +83,7 @@
                                 <center>
                                     <br>
                                     <br>
-                                    <center>
-                                        <div class="row">
-                                            <img class="w-50 col-md-6" src="/static/screenshot15.jpg"></img>
-                                        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:5px;"> 
-                                           Code to see Classification Report
-                                        </div>
+                                    
                                         
                                         <center>
                                             <br>
@@ -99,6 +94,165 @@
                                 <div class="col-md-6 h-50 display-4 bg-light rounded-3" style="margin-top:20px"> Accuracy Score :- {{variable}}</div>
                             </div>
                             <br>
+
+                             <div class="container bg-light text-start rounded-3 w-50">
+          <form method="POST">
+              <br>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Gender
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" >Male</a></li>
+                  <li><a class="dropdown-item" >Female</a></li>
+                </ul>
+              </div>
+              <br>
+            <div class="mb-3">
+                <label  class="form-label">Age</label>
+                <input type="text" class="form-control css" >
+              </div>
+              <br>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Education
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" >1</a></li>
+              <li><a class="dropdown-item" >2</a></li>
+              <li><a class="dropdown-item" >3</a></li>
+              <li><a class="dropdown-item" >4</a></li>
+            </ul>
+          </div>
+          <br>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Current Smoker</label>
+          <div class="form-check">
+            <input  class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label  class="form-check-label" for="flexRadioDefault1">
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input  class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              No
+            </label>
+          </div>
+          </div>
+          <div class="mb-3">
+            <label  class="form-label">Cigarette Per Day</label>
+            <input style="margin:auto;" type="number" class="form-control css" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Blood Pressure Medications</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label  class="form-check-label" for="flexRadioDefault1">
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label  class="form-check-label" for="flexRadioDefault1">
+              No
+            </label>
+          </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Prevalent Stroke</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label  class="form-check-label" for="flexRadioDefault1">
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              No
+            </label>
+          </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Prevalent Hypertension</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label  class="form-check-label" for="flexRadioDefault1">
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label  class="form-check-label" for="flexRadioDefault1">
+              No
+            </label>
+          </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Diabetes</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label  class="form-check-label" for="flexRadioDefault1">
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label  class="form-check-label" for="flexRadioDefault1">
+              No
+            </label>
+          </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Total Cholesterol</label>
+            <input style="margin:auto;" type="text" class="form-control css" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"> Systolic Blood Pressure</label>
+            <input style="margin:auto;" type="text" class="form-control css" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Diastolic Blood Pressure</label>
+            <input style="margin:auto;" type="text" class="form-control css" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">BMI</label>
+            <input style="margin:auto;" type="text" class="form-control css" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Heart Rate</label>
+            <input style="margin:auto;" type="text" class="form-control css" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Glucose</label>
+            <input style="margin:auto;" type="text" class="form-control css" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Ten Year Child</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label  class="form-check-label" for="flexRadioDefault1">
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label  class="form-check-label" for="flexRadioDefault1">
+              No
+            </label>
+          </div>
+          </div>
+          <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <br>
+     <p>Heart Disease :</p>
+     <br>   
+     
+    </div>
+
+    <br>
                           
      
 </div>

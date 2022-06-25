@@ -15,19 +15,18 @@
 <br>
 <div class="bg-light rounded-3 text-center fs-4 p-2">
     <h2 class="display-4">An Example Of SVM</h2>
-    This dataset contains age, salary with purchase behavior predicts which salary group has the highest probabilities of purchasing car whereas which salary group has minimum
-     probabilities of purchasing car.
+    Predicting if the entered recipe is of a muffin or a cupcake based on the quantity of flour and sugar.
+
  </div>
 
 <br>
 <center>
 <div class="row">
    
-<img class="w-50 col-md-6" src="/static/svmimp.PNG"></img>
-<div class="col-md-6 bg-light rounded-3 fs-4">Importing pandas to perform data cleaning in the datasets
+<img class="w-50 col-md-6" src="/static/svm1imp.PNG"></img>
+<div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:40px;">Importing pandas to perform data cleaning in the datasets
     <br>Importing SVC model from sklearn<br>
-    Traintestsplit to split our data to training and testing respectively<br>
-    Matplotlib for data visualisation
+    Matplotlib and Seaborn for data visualisation
 </div>
 <center>
     
@@ -37,16 +36,16 @@
         <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:90px;"> 
             Reading the database
         </div>
-        <img class="w-50 col-md-6" src="/static/svmread.PNG"></img>
+        <img class="w-50 col-md-6" src="/static/svm1read.PNG"></img>
         <center>
             <br>
             <center>
                 <div class="row">
-                    <img class="w-50 col-md-6" src="/static/svmxy.PNG"></img>
+                    <img class="w-50 col-md-6" src="/static/svm1xy.PNG"></img>
                 <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:00px;"> 
-                    The X variable contains all the independent values 
+                    The ingredients variable contains all the independent values 
                     <br>
-                    The Y variable contains the dependent variable which has to be predicted
+                    The type_label variable contains the dependent variable which has to be predicted
                 </div>
                 
                 <center>
@@ -54,38 +53,22 @@
                     <center>
                         <div class="row">
                         <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:0px;"> 
-                            Dividing the data into training and testing data  
-                            <br>
+                           
                             Fitting data in SVM model to train our machine
                         </div>
-                        <img class="w-50 col-md-6" src="/static/svmxtrain.PNG"></img>
+                        <img class="w-50 col-md-6" src="/static/svm1train.PNG"></img>
                         <center>
                             <br>
                             <br>
                     <center>
-                        <div class="row">
-                            <img class="w-50 col-md-6" src="/static/svmaccu.PNG"></img>
-                        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:0px;"> 
-                            Putting test data in prediction model and the code to check Accuracy_score
-                        </div>
-                        
-                        <center>
-                                        
-                                        <center>
-                                            <br>
-                                            <input type="button" class="btn btn-primary" id="linearbtn" value="Click To See Accuracy_score">
-                            <br>
-                            <div class="row p-3" id="graphlinear">
-                               
-                                <div class="h-50 display-4 bg-light rounded-3" style="margin-top:10px"> Accuracy_Score :- {{score}}</div>
-                            </div>
+                      
                             <br>
                             <div class="bg-light p-3 rounded-3 ">
-                                <label class="form-label">Age</label>
-                                <input type="number" class="form-control" id="age">
+                                <label class="form-label">Flour</label>
+                                <input type="number" class="form-control" id="flour">
                                 <br>
-                                <label class="form-label">Salary</label>
-                                <input type="number" class="form-control" id="salary">
+                                <label class="form-label">Sugar</label>
+                                <input type="number" class="form-control" id="sugar">
                                 <br>
                                 <input type="button" class="btn btn-primary" id="pred" value="Click To See Predicted">
                                 <br>
@@ -103,29 +86,22 @@
         $("#graphlinear").fadeToggle(500);
     })
     $("#pred").click(function(){
-        var age = document.getElementById("age");
-        var salary = document.getElementById("salary");
-        age=age.value;
-        salary = salary.value;
+        var flour = document.getElementById("flour");
+        var sugar = document.getElementById("sugar");
+        flour=flour.value;
+        sugar = sugar.value;
         $.ajax({
         type : "post",
-        url : "/svm",
+        url : "/svm1",
         data: {csrfmiddlewaretoken: '{{ csrf_token }}',
-        age,
-        salary
+        flour,
+        sugar
                 },
         success: function(resp)
         {
             var p = resp
-            if(p==0)
-            {
-                $("#p").html("");
-                $("#p").append("Did not purchase")
-            }
-            else{
-                $("#p").html("");
-                $("#p").append("Did purchase")                
-            }
+            $("#p").html("")
+            $("#p").append(resp)
         }
       })
     })

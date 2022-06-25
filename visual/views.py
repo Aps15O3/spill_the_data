@@ -160,7 +160,7 @@ def logistic2(request):
 
     print(pd.DataFrame(X_train))
     context={
-        "variable": accuracy_score(lr_prediction,y_test)
+        "variable": accuracy_score(lr_prediction,y_test)*100
     }   
     if request.method=="POST":
         gender = int(request.POST.get('gender'))
@@ -250,3 +250,23 @@ def svm(request):
         pred=classifier_kernel.predict(pd.DataFrame([[age,salary]],columns=['Age','EstimatedSalary']))[0]
         return HttpResponse(pred)
     return render(request,"svm.html",context)
+
+def svm1(request):
+    recipes = pd.read_csv('static/recipes_muffins_cupcakes.csv')
+    ingredients = recipes[['Flour','Sugar']].values
+    type_label = np.where(recipes['Type']=='Muffin', 0, 1)
+
+# Feature names
+    recipe_features = recipes.columns.values[1:].tolist()
+    model = SVC(kernel='linear')
+    model.fit(ingredients, type_label)
+    if(request.method=='POST'):
+        flour=request.POST.get("flour")
+        sugar=request.POST.get("sugar")
+        p=model.predict([[flour, sugar]])
+        if(p==0):
+            return HttpResponse("You\'re looking at a muffin recipe!")
+        else:
+            return HttpResponse("You\'re looking at a cupcake recipe!")
+    
+    return render(request,'svm1.html')

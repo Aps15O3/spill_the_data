@@ -12,6 +12,7 @@ urlpatterns = [
     path('logistic2',views.logistic2),
     path('intro',views.intro),
     path('logistic3',views.logistic3),
-    path('svm',views.svm)
+    path('svm',views.svm),
+    path('svm1',views.svm1)
 
 ]
