@@ -18,6 +18,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix,accuracy_score
 from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import load_iris
 from sklearn.svm import SVC
 
 def linear(request):
@@ -189,7 +190,7 @@ def home(request):
     
         if transcript=="show me an example of linear regression" or transcript=="I want to see an example of linear regression":         
             return HttpResponse("linear")
-        elif transcript=="show me another example of linear regression" or transcript=="show me linear regression example 2":
+        elif transcript=="show me another example of linear regression" or transcript=="show me linear regression example 2" or transcript=="show me linear regression example to":
             return HttpResponse("linear2")
         elif transcript=="linear regression example 3":
             return HttpResponse("linear3")
@@ -203,6 +204,13 @@ def home(request):
             return HttpResponse("logistic2")
         elif transcript=="show me logistic regression example 3":
             return HttpResponse("logistic3")
+        elif transcript=="show me an example of svm" or transcript=="svm example 1":
+            return HttpResponse("svm")
+        elif transcript=="show me svm example 2" or transcript=="svm example 2":
+            return HttpResponse("svm1")
+        elif transcript=="show me svm example 3" or transcript=="svm example 3":
+            return HttpResponse("svm2")
+        
     
     return render(request,'home.html')
 
@@ -283,3 +291,20 @@ def svm1(request):
             return HttpResponse("You\'re looking at a cupcake recipe!")
     
     return render(request,'svm1.html')
+
+def svm2(request):
+    d=load_iris() 
+    df=pd.DataFrame(d.data,columns=d.feature_names)
+    sepal_length=d['data'][:,0]
+    pedal_length=d['data'][:,2]
+    X=np.column_stack((sepal_length,pedal_length))   # Keeping the sepal and petal length as the X as its the independent variable 
+    y=d.target  #The target attribute here contains the category in which the flowers comes in.
+
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2,random_state=1)
+    clf=SVC(kernel='linear',C=1)
+    clf.fit(X_train,y_train)
+    context={
+        "score":clf.score(X_test,y_test)*100
+    }
+    
+    return render(request,"svm2.html",context)

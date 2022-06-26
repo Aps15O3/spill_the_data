@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}SVM{% endblock title %}
+
+{% block body %}
+<div class="container ">
+    <br>
+<div class="bg-light rounded-3 text-center fs-4 p-2">
+    <h2 class="display-4">Support Vector Machine(SVM)</h2>
+    Support Vector Machine(SVM) is a supervised machine learning algorithm used for both classification and regression. 
+    Though we say regression problems as well its best suited for classification. The objective of SVM algorithm is to find a 
+    hyperplane in an N-dimensional space that distinctly classifies the data points. The dimension of the hyperplane depends upon the number of features. 
+    If the number of input features is two, 
+    then the hyperplane is just a line. If the number of input features is three, then the hyperplane becomes a 2-D plane.</div>
+
+<br>
+<div class="bg-light rounded-3 text-center fs-4 p-2">
+    <h2 class="display-4">An Example Of SVM</h2>
+    Project on iris data set using SVM The SVM is an algorihtm used for calssification,in which a 
+    hyperplane is created between data points in order to classify the data in groups.
+ </div>
+
+<br>
+<center>
+<div class="row">
+   
+<img class="w-50 col-md-6" src="/static/svm2imp.PNG"></img>
+<div class="col-md-6 bg-light rounded-3 fs-4">Importing pandas to perform data cleaning in the datasets
+    <br>Importing SVC model from sklearn<br>
+    Traintestsplit to split our data to training and testing respectively<br>
+    Matplotlib for data visualisation
+</div>
+<center>
+    
+    <br>
+    <center>
+        <div class="row">
+        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:90px;"> 
+            Reading the database
+        </div>
+        <img class="w-50 col-md-6" src="/static/svm2read.PNG"></img>
+        <center>
+            <br>
+            <center>
+                <div class="row">
+                    <img class="w-50 col-md-6" src="/static/svm2xy.PNG"></img>
+                <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:00px;"> 
+                    The sepal_length variable contains all the independent values 
+                    <br>
+                    The pedal_length variable contains the dependent variable which has to be predicted
+                </div>
+                
+                <center>
+                    <br>
+                    <center>
+                        <div class="row">
+                        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:0px;"> 
+                            Dividing the data into training and testing data  
+                            <br>
+                            Fitting data in SVM model to train our machine
+                        </div>
+                        <img class="w-50 col-md-6" src="/static/svm2xtrain.PNG"></img>
+                        <center>
+                            <br>
+                            <br>
+                    <center>
+                        <div class="row">
+                            <img class="w-50 col-md-6" src="/static/svm2accu.PNG"></img>
+                        <div class="col-md-6 bg-light rounded-3 fs-4 h-50" style="margin-top:0px;"> 
+                            Putting test data in prediction model and the code to check Accuracy_score
+                        </div>
+                        
+                        <center>
+                                        
+                                        <center>
+                                            <br>
+                                            <input type="button" class="btn btn-primary" id="linearbtn" value="Click To See Accuracy_score">
+                            <br>
+                            <div class="row p-3" id="graphlinear">
+                               
+                                <div class="h-50 display-4 bg-light rounded-3" style="margin-top:10px"> Accuracy_Score :- {{score}}</div>
+                            </div>
+                           
+                            <br>
+                </div>
+                
+                </div>
+<script>
+    $("#graphlinear").hide()
+    $("#linearbtn").click(function(){
+        $("#graphlinear").fadeToggle(500);
+    })
+    
+</script>
+
+
+{% endblock body %}
