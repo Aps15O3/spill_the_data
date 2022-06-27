@@ -190,7 +190,7 @@ def home(request):
     
         if transcript=="show me an example of linear regression" or transcript=="I want to see an example of linear regression":         
             return HttpResponse("linear")
-        elif transcript=="show me another example of linear regression" or transcript=="show me linear regression example 2" or transcript=="show me linear regression example to":
+        elif transcript=="show me another example of linear regression" or transcript=="show me linear regression example 2" or transcript=="show me linear regression example to" or transcript=="linear regression example to" or transcript=="linear regression example 2":
             return HttpResponse("linear2")
         elif transcript=="linear regression example 3":
             return HttpResponse("linear3")
@@ -198,11 +198,11 @@ def home(request):
             return HttpResponse("intro") 
         elif transcript=="home" or transcript=="take me back to homepage" or transcript=="take me to homepage"  or transcript=="take me to home page" or transcript=="take me back to home page":
             return HttpResponse("home")        
-        elif transcript=="show me an example of logistic regression":
+        elif transcript=="show me an example of logistic regression" or transcript=="logistic regression ":
             return HttpResponse("logistic") 
-        elif transcript=="show me logistic regression example 2" or transcript=="show me logistic regression example to":
+        elif transcript=="show me logistic regression example 2" or transcript=="show me logistic regression example to" or transcript=="logistic regression example to" or transcript=="logistic regression example 2":
             return HttpResponse("logistic2")
-        elif transcript=="show me logistic regression example 3":
+        elif transcript=="show me logistic regression example 3" or transcript=="logistic regression example 3":
             return HttpResponse("logistic3")
         elif transcript=="show me an example of svm" or transcript=="svm example 1":
             return HttpResponse("svm")
